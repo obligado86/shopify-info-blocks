@@ -1,0 +1,290 @@
+<style>
+  #info-blocks-section {
+    padding-top: {{ section.settings.custom-slider-top-padding }}px;
+    padding-bottom: {{ section.settings.custom-slider-bottom-padding }}px;
+  }
+
+  .info-block-text h1 {
+    font-size: 5rem !important;
+  }
+  
+  .info-block-text h2 {
+    font-size: 4.5rem !important;
+  }
+
+  .info-block-text h3 {
+    font-size: 4rem !important;
+  }
+
+  .info-block-text h4 {
+    font-size: 3.5rem !important;
+  }
+
+  .info-block-text h5 {
+    font-size: 3rem !important;
+  }
+
+  .info-block-text h6 {
+    font-size: 2.5rem !important;
+  }
+
+  .info-block-text ul {
+    list-style: initial;
+  }
+
+  @media (max-width: 500px) {
+      .info-block-text h1 {
+      font-size: 4rem !important;
+    }
+  
+    .info-block-text h2 {
+      font-size: 3.5rem !important;
+    }
+
+    .info-block-text h3 {
+      font-size: 3rem !important;
+    }
+
+    .info-block-text h4 {
+      font-size: 2.5rem !important;
+    }
+
+    .info-block-text h5 {
+      font-size: 2rem !important;
+    }
+
+    .info-block-text h6 {
+      font-size: 1.5rem !important;
+    }
+  }
+</style>
+
+<div class="{%- if section.settings.full-width-section == true -%}100-vw{%- else -%}container{%- endif -%}" id="info-blocks-section">
+  <div class="row">
+    {% if section.settings.info-block-heading != blank %}
+      <h2 class="{{ section.settings.heading-style }}">{{ section.settings.info-block-heading }}</h2>
+    {% endif %}
+    <div class="col-12 col-md-6 p-3 {% if section.settings.image-sort == true %}order-2{% endif %}">
+      <div class="row my-2">
+        <div class="{% if section.settings.info-text2 != blank %}col-6 w-50{% else %}col-12 w-100{% endif %} p-1">
+          <div class="info-block-text {{ section.settings.text_style1 }}">
+            {{ section.settings.info-text1 }}
+          </div>
+        </div>
+        {% if section.settings.info-text2 != blank %}
+          <div class="col-6 p-1 w-50">
+            <div class="info-block-text {{ section.settings.text_style2 }}">
+              {{ section.settings.info-text2 }}
+            </div>
+          </div>  
+        {% endif %}
+      </div>
+      {% if section.settings.info-text3 != blank %}
+        <div class="row my-2">
+            <div class="{% if section.settings.info-text4 != blank %}col-6 w-50{% else %}col-12 w-100{% endif %} p-1">
+              <div class="info-block-text {{ section.settings.text_style3 }}">
+                {{ section.settings.info-text3 }}
+              </div>
+            </div>
+            {% if section.settings.info-text4 != blank %}
+              <div class="col-6 p-1 w-50">
+                <div class="info-block-text {{ section.settings.text_styl4 }}">
+                  {{ section.settings.info-text4 }}
+                </div>
+              </div>  
+            {% endif %}
+      `</div>
+      {% endif %}
+    </div>
+    <!--  for image  -->
+    <div class="col-12 col-md-6 {% if section.settings.image-sort == true %}order-1{% endif %}">
+      {% if section.settings.info-block-image != blank %}
+        <img src="{{ section.settings.info-block-image | image_url }}"
+          alt="{{ section.settings.info-block-image.alt | escape }}"
+          loading="lazy"
+          class="img-fluid"
+        >
+      {%- else -%}
+        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Info Blocks",
+    "class": "section",
+    "tag": "section",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "full-width-section",
+        "default": false,
+        "label": "Enable full width?"
+      },
+      {
+        "type": "text",
+        "id": "info-block-heading",
+        "label": "Heading",
+        "default": "Info Block"
+      },
+      {
+        "type": "select",
+        "id": "heading-style",
+        "options": [
+          {
+            "value": "h6",
+            "label": "small"
+          },
+          {
+            "value": "h5",
+            "label": "Medium"
+          },
+          {
+            "value": "h4",
+            "label": "large"
+          },
+          {
+            "value": "h3",
+            "label": "XL"
+          },
+          {
+            "value": "h2",
+            "label": "XXL"
+          },
+          {
+            "value": "h1",
+            "label": "XXXL"
+          }
+        ],
+        "label": "Font Size",
+        "default": "h2"
+      },
+      {
+        "type": "richtext",
+        "id": "info-text1",
+        "label": "info block text 1",
+        "default": "<p>Product information and benefits here</p>"
+      },
+      {
+        "type": "select",
+        "id": "text_style1",
+        "options": [
+          {
+            "value": "body",
+            "label": "t:sections.image-with-text.blocks.text.settings.text_style.options__1.label"
+          },
+          {
+            "value": "subtitle",
+            "label": "t:sections.image-with-text.blocks.text.settings.text_style.options__2.label"
+           }
+        ],
+        "default": "body",
+        "label": "t:sections.image-with-text.blocks.text.settings.text_style.label"
+      },
+      {
+        "type": "richtext",
+        "id": "info-text2",
+        "label": "info block text 2"
+      },
+      {
+        "type": "select",
+        "id": "text_style2",
+        "options": [
+          {
+            "value": "body",
+            "label": "t:sections.image-with-text.blocks.text.settings.text_style.options__1.label"
+          },
+          {
+            "value": "subtitle",
+            "label": "t:sections.image-with-text.blocks.text.settings.text_style.options__2.label"
+           }
+        ],
+        "default": "body",
+        "label": "t:sections.image-with-text.blocks.text.settings.text_style.label"
+      },
+      {
+        "type": "richtext",
+        "id": "info-text3",
+        "label": "info block text 3"
+      },
+      {
+        "type": "select",
+        "id": "text_style3",
+        "options": [
+          {
+            "value": "body",
+            "label": "t:sections.image-with-text.blocks.text.settings.text_style.options__1.label"
+          },
+          {
+            "value": "subtitle",
+            "label": "t:sections.image-with-text.blocks.text.settings.text_style.options__2.label"
+           }
+        ],
+        "default": "body",
+        "label": "t:sections.image-with-text.blocks.text.settings.text_style.label"
+      },
+      {
+        "type": "richtext",
+        "id": "info-text4",
+        "label": "info block text 4"
+      },
+      {
+        "type": "select",
+        "id": "text_style4",
+        "options": [
+          {
+            "value": "body",
+            "label": "t:sections.image-with-text.blocks.text.settings.text_style.options__1.label"
+          },
+          {
+            "value": "subtitle",
+            "label": "t:sections.image-with-text.blocks.text.settings.text_style.options__2.label"
+           }
+        ],
+        "default": "body",
+        "label": "t:sections.image-with-text.blocks.text.settings.text_style.label"
+      },
+      {
+        "type": "image_picker",
+        "id": "info-block-image",
+        "label": "image"
+      },
+      {
+        "type": "checkbox",
+        "id": "image-sort",
+        "default": false,
+        "label": "set image first?"
+      },
+      {
+        "type": "range",
+        "min": 0,
+        "max": 50,
+        "step": 1,
+        "default": 0,
+        "id": "custom-slider-top-padding",
+        "label": "top padding"
+      },
+      {
+        "type": "range",
+        "min": 0,
+        "max": 50,
+        "step": 1,
+        "default": 0,
+        "id": "custom-slider-bottom-padding",
+        "label": "bottom padding"
+      }
+    ],
+    "presets": [
+      {
+        "name": {
+          "en":"Info Blocks"
+        },
+        "category": {
+          "en": "Image"
+        }
+      }
+    ]
+  }
+{% endschema %}
